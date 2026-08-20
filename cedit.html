@@ -217,7 +217,7 @@ function drawEdit() {
   for (let py = 0; py < editSize; py++) {
     for (let px = 0; px < editSize; px++) {
       // 背景
-      editCtx.fillStyle = (px + py) % 2 === 0 ? "#ffffff" : "#e0e0e0";
+      editCtx.fillStyle = (px + py) % 2 === 0 ? "#a0a0a0" : "#e0e0e0";
       editCtx.fillRect(px * scale, py * scale, scale, scale);
 
       // ドット
