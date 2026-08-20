@@ -37,6 +37,7 @@
     <!-- 左：全体マップ -->
     <div class="left-panel">
       <div>Char Map (8x8dots*256Chars)</div>
+      <div>[WASD] Move Cursor</div>
       <canvas id="mapCanvas" width="128" height="128"></canvas>
     </div>
 
@@ -62,7 +63,7 @@
         <button onclick="rotate90()">↻ 90度回転</button>
       </div>
 
-      <div id="statusLabel">Pos: (0, 0) [16x16] | [WASD] Move Cursor | [Ctrl+C/V] Copy&Paste</div>
+      <div id="statusLabel">Pos: (0, 0) [16x16] | [Ctrl+C/V] Copy&Paste</div>
       <canvas id="editCanvas" width="320" height="320"></canvas>
     </div>
   </div>
@@ -293,7 +294,7 @@
     }
 
     function updateStatus() {
-      document.getElementById('statusLabel').innerText = `Pos: (${selectedTileX.toString(16)}, ${selectedTileY.toString(16)}) [${editSize}x${editSize}] | [WASD] Move Cursor | [Ctrl+C/V] Copy&Paste`;
+      document.getElementById('statusLabel').innerText = `Pos: (${selectedTileX.toString(16)}, ${selectedTileY.toString(16)}) [${editSize}x${editSize}] | [Ctrl+C/V] Copy&Paste`;
     }
 
     // --- キーボード操作 (WASD: マップカーソル移動) ---
