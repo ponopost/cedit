@@ -390,10 +390,10 @@ function saveImage(format) {
 }
 
 function saveImageEdit(format) {
-  // 1. 編集エリア用の16x16または32x32サイズのOffscreen Canvasを作成
+  // 1. 編集エリア用の8x8または16x16または32x32サイズのOffscreen Canvasを作成
   const cropCanvas = document.createElement('canvas');
-  cropCanvas.width = editSize;  // 16 or 32
-  cropCanvas.height = editSize; // 16 or 32
+  cropCanvas.width = editSize;  // 8 or 16 or 32
+  cropCanvas.height = editSize; // 8 or 16 or 32
   const cropCtx = cropCanvas.getContext('2d');
 
   // 2. メイン画像(128x128)の選択エリアから切り出してコピー
@@ -456,10 +456,12 @@ function loadRom(e, type) {
         // 描画
         updateAll();
       } else {
-        alert("有効なNES ROMファイルではありません。");
+        // alert("有効なNES ROMファイルではありません。");
+        alert("Invalid NES ROM file.");
       }
     } else {
-      alert("ファイルサイズが小さすぎます。");
+      // alert("ファイルサイズが小さすぎます。");
+      alert("File size is too small.");
     }
   };
 
