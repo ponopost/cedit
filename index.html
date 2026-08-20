@@ -64,12 +64,12 @@
 <h3>Famicom-style Icon Editor</h3>
 
 <div class="controls">
-  <button onclick="document.getElementById('fileInput').click()">PNG読込</button>
-  <button onclick="document.getElementById('fileInput_bg').click()">ROM読込(BG)</button>
-  <button onclick="document.getElementById('fileInput_sp').click()">ROM読込(SP)</button>
+  <button onclick="document.getElementById('fileInput').click()">Load PNG</button>
+  <button onclick="document.getElementById('fileInput_bg').click()">Load ROM(BG)</button>
+  <button onclick="document.getElementById('fileInput_sp').click()">Load ROM(SP)</button>
 <br>
-  <button onclick="saveImage('png')">PNGで保存(128x128)</button>
-  <button onclick="saveImageEdit('png')">PNGで保存(16x16 or 32x32)</button>
+  <button onclick="saveImage('png')">Download PNG(128x128)</button>
+  <button onclick="saveImageEdit('png')">Download PNG(16x16 or 32x32)</button>
   <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="loadImage(event)">
   <input type="file" id="fileInput_bg" accept="*/*" style="display:none" onchange="loadRom(event, 'BG')">
   <input type="file" id="fileInput_sp" accept="*/*" style="display:none" onchange="loadRom(event, 'SP')">
@@ -78,24 +78,24 @@
 <div class="container">
   <!-- 左：全体マップ -->
   <div class="left-panel">
-    <div>全体 (128x128ドット、16x16キャラクタ)</div>
+    <div>Char Map (128x128dots, 16x16Chars)</div>
     <canvas id="mapCanvas" width="128" height="128"></canvas>
   </div>
 
   <!-- 右：拡大編集エリア -->
   <div class="right-panel">
     <div class="controls">
-      編集サイズ:
+      Edit Size:
       <label><input type="radio" name="editSize" value="16" checked onchange="setSize(16)"> 16x16</label>
       <label><input type="radio" name="editSize" value="32" onchange="setSize(32)"> 32x32</label>
     </div>
-    <div id="statusLabel">位置: (0, 0) [16x16] | [WASD] スクロール | [Ctrl+C/V] コピペ</div>
+    <div id="statusLabel">Pos: (0, 0) [16x16] | [WASD] Scroll | [Ctrl+C/V] Copy&Paste</div>
     <canvas id="editCanvas" width="320" height="320"></canvas>
   </div>
 </div>
 
 <!-- カラーパレット -->
-<div>カラーパレット (左クリックで描画色選択):</div>
+<div>Color:</div>
 <div class="palette" id="palette"></div>
 <div id="indicator">選択色</div>
 
