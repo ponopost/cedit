@@ -68,8 +68,8 @@
   <button onclick="document.getElementById('fileInput_bg').click()">Load NES ROM(BG)</button>
   <button onclick="document.getElementById('fileInput_sp').click()">Load NES ROM(SP)</button>
 <br>
-  <button onclick="saveImage('png')">Download PNG(128x128)</button>
-  <button onclick="saveImageEdit('png')">Download PNG(16x16 or 32x32)</button>
+  <button onclick="saveImage('png')">Download Map PNG(128x128)</button>
+  <button onclick="saveImageEdit('png')">Download Edit PNG(8x8, 16x16, 32x32)</button>
   <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="loadImage(event)">
   <input type="file" id="fileInput_bg" accept="*/*" style="display:none" onchange="loadRom(event, 'BG')">
   <input type="file" id="fileInput_sp" accept="*/*" style="display:none" onchange="loadRom(event, 'SP')">
