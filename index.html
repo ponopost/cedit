@@ -57,6 +57,17 @@
     text-align: center;
     width: 120px;
   }
+  /* 左パネルのキャンバス設定 */
+  #mapCanvas {
+    /* ぼかしを無効化してドットをパキッと表示 */
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    /* 128px の整数倍（例: 2倍の256px、または3倍の384px）を指定 */
+    width: 128px;
+    height: 128px;
+    /* 必要に応じて枠線などを追加 */
+    border: 1px solid #ccc;
+  }
 </style>
 </head>
 <body>
