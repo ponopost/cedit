@@ -261,7 +261,11 @@
         const pixel = imgCtx.getImageData(absX, absY, 1, 1).data;
         
         const curHex = pixel[3] === 0 ? 'transparent' : rgbToHex(pixel[0], pixel[1], pixel[2]);
-        drawModeColor = (curHex === color1) ? color2 : color1;
+        if (curHex !== color1 && curHex !== color2){
+          drawModeColor = color1;
+        } else {
+          drawModeColor = (curHex === color1) ? color2 : color1;
+        }
         setPixel(absX, absY, drawModeColor);
       }
     }
