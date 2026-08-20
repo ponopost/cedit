@@ -1,6 +1,7 @@
 # cedit
 
 ファミコン風ドット絵・キャラクターエディタ（HTML5 Canvas）
+NES-style Pixel Art & Character Editor (HTML5 Canvas)
 
 ## 機能
 - **2色描画（MacPaint風）**: タッチ・クリックで「色1」「色2」をスマートに切り替えて描画・消去
