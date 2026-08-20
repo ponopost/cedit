@@ -12,4 +12,3 @@
 ## 使い方
 1. [GitHub Pages](https://ponopost.github.io/cedit/cedit.html) にアクセスします。
 2. 画面上のパレットで色1・色2を選択し、ドットを描画します。
-3. 
