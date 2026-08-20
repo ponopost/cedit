@@ -86,9 +86,9 @@
   <div class="right-panel">
     <div class="controls">
       Edit Size:
-      <label><input type="radio" name="editSize" value="8" checked onchange="setSize(8)"> 8x8</label>
-      <label><input type="radio" name="editSize" value="16" checked onchange="setSize(16)"> 16x16</label>
-      <label><input type="radio" name="editSize" value="32" onchange="setSize(32)"> 32x32</label>
+      <label><input type="radio" name="editSize" value="8" checked onchange="setSize(8)">8x8dots</label>
+      <label><input type="radio" name="editSize" value="16" checked onchange="setSize(16)">16x16dots</label>
+      <label><input type="radio" name="editSize" value="32" onchange="setSize(32)">32x32dots</label>
     </div>
     <div id="statusLabel">Pos: (0, 0) [16x16] | [WASD] Scroll | [Ctrl+C/V] Copy&Paste</div>
     <canvas id="editCanvas" width="320" height="320"></canvas>
@@ -321,7 +321,7 @@ function setSize(size) {
 
 function updateStatus() {
   document.getElementById('statusLabel').innerText =
-    `位置: (${selectedTileX.toString(16)}, ${selectedTileY.toString(16)}) [${editSize}x${editSize}] | [WASD] スクロール | [Ctrl+C/V] コピペ`;
+    `Pos: (${selectedTileX.toString(16)}, ${selectedTileY.toString(16)}) [${editSize}x${editSize}] | [WASD] Scroll | [Ctrl+C/V] Copy&Paste`;
 }
 
 // --- キーボードショートカット (WASD / Ctrl+C / Ctrl+V) ---
