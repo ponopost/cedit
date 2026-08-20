@@ -17,6 +17,15 @@
     .color-slots { display: flex; gap: 10px; margin-top: 10px; }
     .color-slot { padding: 6px 12px; border: 2px solid #333; font-weight: bold; cursor: pointer; border-radius: 4px; }
     #mapCanvas { image-rendering: pixelated; image-rendering: crisp-edges; width: 128px; height: 128px; border: 1px solid #ccc; }
+    .color-btn.transparent-btn {
+      background-color: #fff;
+      background-image: linear-gradient(45deg, #ccc 25%, transparent 25%), 
+                        linear-gradient(-45deg, #ccc 25%, transparent 25%), 
+                        linear-gradient(45deg, transparent 75%, #ccc 75%), 
+                        linear-gradient(-45deg, transparent 75%, #ccc 75%);
+      background-size: 8px 8px;
+      background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
+    }
   </style>
 </head>
 <body>
@@ -124,10 +133,12 @@
     });
 
     const transBtn = document.createElement('div');
-    transBtn.className = 'color-btn';
-    transBtn.style.backgroundColor = '#fff';
+    transBtn.className = 'color-btn transparent-btn'; // ← クラスを追加
     transBtn.innerText = '透';
     transBtn.style.textAlign = 'center';
+    transBtn.style.lineHeight = '22px'; // テキストの位置調整
+    transBtn.style.fontSize = '12px';
+    transBtn.style.fontWeight = 'bold';
     transBtn.onclick = () => selectColor('transparent');
     paletteEl.appendChild(transBtn);
 
@@ -146,6 +157,10 @@
       const ind1 = document.getElementById('indicator1');
       const ind2 = document.getElementById('indicator2');
 
+      applySlotStyle(ind1, color1, activeSlot === 1);
+      applySlotStyle(ind2, color2, activeSlot === 2);
+
+      /*
       ind1.style.backgroundColor = color1 === 'transparent' ? '#fff' : color1;
       ind1.style.color = (color1 === 'transparent' || getBrightness(color1) > 128) ? 'black' : 'white';
       ind1.style.border = activeSlot === 1 ? '3px solid red' : '2px solid #333';
@@ -153,6 +168,20 @@
       ind2.style.backgroundColor = color2 === 'transparent' ? '#fff' : color2;
       ind2.style.color = (color2 === 'transparent' || getBrightness(color2) > 128) ? 'black' : 'white';
       ind2.style.border = activeSlot === 2 ? '3px solid red' : '2px solid #333';
+      */
+    }
+
+    function applySlotStyle(element, color, isActive) {
+      if (color === 'transparent') {
+        element.classList.add('transparent-btn');
+        element.style.backgroundColor = '';
+        element.style.color = 'black';
+      } else {
+        element.classList.remove('transparent-btn');
+        element.style.backgroundColor = color;
+        element.style.color = getBrightness(color) > 128 ? 'black' : 'white';
+      }
+      element.style.border = isActive ? '3px solid red' : '2px solid #333';
     }
 
     function getBrightness(hex) {
@@ -502,3 +531,4 @@
   </script>
 </body>
 </html>
+
