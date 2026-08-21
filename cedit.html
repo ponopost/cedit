@@ -584,9 +584,10 @@
               let c2 = (b2 >> shift) & 1;
               let colorIdx = c1 + (c2 * 2);
               let rgb = "#000000";
-              if (colorIdx === 1) rgb = "#606060";
-              if (colorIdx === 2) rgb = "#a0a0a0";
-              if (colorIdx === 3) rgb = "#e0e0e0";
+              // "#FFFFFF", "#D6D6D6", "#ADADAD", "#666666",
+              if (colorIdx === 1) rgb = "#666666";
+              if (colorIdx === 2) rgb = "#ADADAD";
+              if (colorIdx === 3) rgb = "#D6D6D6";
               imgCtx.fillStyle = rgb;
               imgCtx.fillRect(x + i, y + j, 1, 1);
             }
