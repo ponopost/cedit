@@ -248,9 +248,9 @@
           // editCtx.fillRect(px * scale, py * scale, scale, scale);
           // bgMode に応じて背景色を変更
           if (bgMode === 'dark') {
-            editCtx.fillStyle = (px + py) % 2 === 0 ? "#333333" : "#222222";
+            editCtx.fillStyle = (px + py) % 2 === 0 ? "#444444" : "#222222";
           } else if (bgMode === 'green') {
-            editCtx.fillStyle = (px + py) % 2 === 0 ? "#00FF00" : "#00CC00";
+            editCtx.fillStyle = (px + py) % 2 === 0 ? "#00EE00" : "#00CC00";
           } else { // light
             editCtx.fillStyle = (px + py) % 2 === 0 ? "#e8e8e8" : "#b8b8b8";
           }
