@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>Famicom-style Char Editor (HTML Canvas)</title>
+  <title>NES-style Char Editor (HTML Canvas)</title>
   <style>
     body { font-family: sans-serif; background: #f0f0f0; margin: 20px; user-select: none; }
     .container { display: flex; gap: 20px; }
@@ -37,7 +37,7 @@
   </style>
 </head>
 <body>
-  <h3>Famicom-style Char Editor</h3>
+  <h3>NES-style Char Editor</h3>
   
   <div class="controls">
     <button onclick="document.getElementById('fileInput').click()">Load PNG</button>
@@ -74,6 +74,12 @@
         <label><input type="radio" name="editSize" value="8" onchange="setSize(8)">8x8</label>
         <label><input type="radio" name="editSize" value="16" checked onchange="setSize(16)">16x16</label>
         <label><input type="radio" name="editSize" value="32" onchange="setSize(32)">32x32</label>
+      </div>
+      <div class="controls">
+        <span>BG Grid: </span>
+        <button onclick="setBgMode('light')">Light</button>
+        <button onclick="setBgMode('dark')">Dark</button>
+        <button onclick="setBgMode('green')">Green</button>
       </div>
 
       <!-- スクロール & 変形操作ボタン -->
