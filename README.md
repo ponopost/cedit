@@ -11,5 +11,5 @@
 - **ファイル入出力**: NES ROM（BG/SP）読み込み、PNG保存対応
 
 ## 使い方
-1. [GitHub Pages](https://ponopost.github.io/cedit/cedit.html) にアクセスします。
+1. [GitHub cedit Pages](https://ponopost.github.io/cedit/cedit.html) にアクセスします。
 2. 画面上のパレットで色1・色2を選択し、ドットを描画します。
