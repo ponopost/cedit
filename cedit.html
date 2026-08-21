@@ -10,6 +10,7 @@
     .right-panel { flex-grow: 1; }
     canvas { border: 1px solid #999; background: #e0e0e0; image-rendering: pixelated; }
     #editCanvas { width: 100%; max-width: 500px; height: auto; aspect-ratio: 1 / 1; cursor: crosshair; touch-action: none; }
+    .infos { margin-bottom: 8px; }
     .controls { margin-bottom: 8px; }
     .controls button { margin-right: 4px; margin-bottom: 4px; padding: 4px 8px; cursor: pointer; }
     .palette { display: grid; grid-template-columns: repeat(4, 24px); gap: 2px; margin-top: 10px; }
@@ -53,19 +54,16 @@
   <div class="container">
     <!-- 左：全体マップ -->
     <div class="left-panel">
-      <div>Char Map (8x8dots*256Chars)</div>
-      <br>
+      <div class="infos">Char Map (8x8dots*256Chars)</div>
       <canvas id="mapCanvas" width="128" height="128"></canvas>
-      <br>
-      <div>[WASD] Move Cursor</div>
-      <br>
-  <!-- カラー選択エリア -->
-  <div class="color-slots">
-    <div id="indicator1" class="color-slot" onclick="setActiveSlot(1)">Color1</div>
-    <div id="indicator2" class="color-slot" onclick="setActiveSlot(2)">Color2</div>
-  </div>
-  <div class="palette" id="palette"></div>
-  </div>
+      <div class="infos">[WASD] Move Cursor</div>
+      <!-- カラー選択エリア -->
+      <div class="color-slots">
+        <div id="indicator1" class="color-slot" onclick="setActiveSlot(1)">Color1</div>
+        <div id="indicator2" class="color-slot" onclick="setActiveSlot(2)">Color2</div>
+      </div>
+      <div class="palette" id="palette"></div>
+    </div>
 
     <!-- 右：拡大編集エリア -->
     <div class="right-panel">
@@ -81,7 +79,6 @@
         <button onclick="setBgMode('dark')">Dark</button>
         <button onclick="setBgMode('green')">Green</button>
       </div>
-
       <!-- スクロール & 変形操作ボタン -->
       <div class="controls">
         <span>Scroll: </span>
@@ -90,17 +87,19 @@
         <button onclick="scrollArea('a')">◀ Left</button>
         <button onclick="scrollArea('d')">▶ Right</button>
       </div>
-
       <div class="controls">
         <span>Transform: </span>
         <button onclick="flipHorizontal()">⇄ Horz Invert</button>
         <button onclick="flipVertical()">⇅ Vert Invert</button>
         <button onclick="rotate90()">↻ Rotate 90</button>
       </div>
-
-      <div id="copypaste"><span>[Ctrl+C/V] Copy&Paste</span></div>
-
-      <div id="statusLabel">Pos: (0, 0) [16x16]</div>
+      <div class="controls">
+        <!-- <div class="infos"><span>[Ctrl+C/V] Copy&Paste</span></div> -->
+        <span>copy&paste: </span>span>
+        <button onclick="editcopy()">Copy</button>
+        <button onclick="editpaste()">Paste</button>
+      </div>
+      <div class="infos" id="statusLabel">Pos: (0, 0) [16x16]</div>
       <canvas id="editCanvas" width="320" height="320"></canvas>
     </div>
   </div>
