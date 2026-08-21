@@ -89,14 +89,16 @@
         <button onclick="scrollArea('s')">▼ Down</button>
         <button onclick="scrollArea('a')">◀ Left</button>
         <button onclick="scrollArea('d')">▶ Right</button>
-        <br>
+      </div>
+
+      <div class="controls">
         <span>Transform: </span>
         <button onclick="flipHorizontal()">⇄ Horz Invert</button>
         <button onclick="flipVertical()">⇅ Vert Invert</button>
         <button onclick="rotate90()">↻ Rotate 90</button>
-        <br>
-        <span>[Ctrl+C/V] Copy&Paste</span>
       </div>
+
+      <div id="copypaste"><span>[Ctrl+C/V] Copy&Paste</span></div>
 
       <div id="statusLabel">Pos: (0, 0) [16x16]</div>
       <canvas id="editCanvas" width="320" height="320"></canvas>
