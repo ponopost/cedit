@@ -288,6 +288,7 @@
     // --- タッチ & マウス対応描画（MacPaint風トグル） ---
     function handlePointerStart(e) {
       isMouseDown = true;
+      pushHistory();
       const rect = editCanvas.getBoundingClientRect();
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
       const clientY = e.touches ? e.touches[0].clientY : e.clientY;
@@ -352,7 +353,7 @@
     });
 
     function setPixel(x, y, color) {
-      pushHistory();
+      // pushHistory();
       if (color === 'transparent') {
         imgCtx.clearRect(x, y, 1, 1);
       } else {
@@ -379,22 +380,12 @@
     // --- キーボード操作 (WASD: マップカーソル移動) ---
     window.addEventListener('keydown', (e) => {
       if (e.ctrlKey && e.key === 'c') {
-        /*
-        const bx = selectedTileX * TILE_PIXELS;
-        const by = selectedTileY * TILE_PIXELS;
-        clipboardData = imgCtx.getImageData(bx, by, editSize, editSize);
-        */
         copyTile();
       } else if (e.ctrlKey && e.key === 'v') {
-        /*
-        if (clipboardData) {
-          const bx = selectedTileX * TILE_PIXELS;
-          const by = selectedTileY * TILE_PIXELS;
-          imgCtx.putImageData(clipboardData, bx, by);
-          updateAll();
-        }
-        */
         pasteTile();
+      } else if (e.ctrlKey && e.key === 'z') {
+        e.preventDefault();
+        undoImage();
       } else if (['w', 'a', 's', 'd'].includes(e.key.toLowerCase())) {
         moveMapCursor(e.key.toLowerCase());
       }
@@ -420,7 +411,12 @@
 
     function clearTile() {
       pushHistory();
+
       // クリア処理
+      const bx = selectedTileX * TILE_PIXELS;
+      const by = selectedTileY * TILE_PIXELS;
+      imgCtx.clearRect(bx, by, editSize, editSize); // 選択エリアを消去
+
       updateAll();
       saveToStorage();
     }
