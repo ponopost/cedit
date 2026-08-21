@@ -111,21 +111,21 @@
 
     // ファミコン（NES）標準カラーパレット（54色）+2色
     const PALETTE = [
-  "#FFFFFF", "#D6D6D6", "#ADADAD", "#666666",
-  "#C0DFFF", "#64B0FF", "#155FD9", "#002A88",
-  "#D3D2FF", "#9290FF", "#4240FF", "#1412A7",
-  "#E8C8FF", "#C676FF", "#7527FE", "#3B00A4",
-  "#FBC2FF", "#F36AFF", "#A01ACC", "#5C007E",
-  "#FEC2EB", "#FE6ECC", "#B71E7B", "#6E0040",
-  "#FECECA", "#FE8170", "#B53120", "#6C0600",
-  "#F6DAA6", "#EA9E22", "#994E00", "#561D00",
-  "#E4E594", "#BCBE00", "#6B6D00", "#333500",
-  "#CFEE96", "#88D800", "#388700", "#0B4800",
-  "#B5F5B6", "#5CE430", "#0C8C00", "#005200",
-  "#A8F5D0", "#45E082", "#00872B", "#004F08",
-  "#A9EAFE", "#48CDDE", "#00778A", "#00404D",
-  "#B8B8B8", "#848484", "#4F4F4F", "#000000"
-];
+      "#FFFFFF", "#D6D6D6", "#ADADAD", "#666666",
+      "#C0DFFF", "#64B0FF", "#155FD9", "#002A88",
+      "#D3D2FF", "#9290FF", "#4240FF", "#1412A7",
+      "#E8C8FF", "#C676FF", "#7527FE", "#3B00A4",
+      "#FBC2FF", "#F36AFF", "#A01ACC", "#5C007E",
+      "#FEC2EB", "#FE6ECC", "#B71E7B", "#6E0040",
+      "#FECECA", "#FE8170", "#B53120", "#6C0600",
+      "#F6DAA6", "#EA9E22", "#994E00", "#561D00",
+      "#E4E594", "#BCBE00", "#6B6D00", "#333500",
+      "#CFEE96", "#88D800", "#388700", "#0B4800",
+      "#B5F5B6", "#5CE430", "#0C8C00", "#005200",
+      "#A8F5D0", "#45E082", "#00872B", "#004F08",
+      "#A9EAFE", "#48CDDE", "#00778A", "#00404D",
+      "#B8B8B8", "#848484", "#4F4F4F", "#000000"
+    ];
 
     const imgCanvas = document.createElement('canvas');
     imgCanvas.width = MAP_SIZE;
@@ -136,7 +136,8 @@
     let selectedTileY = 0;
     let editSize = 16;
     let clipboardData = null;
-
+    let bgMode = 'light'; // 透明色 デフォルトはLight
+    
     // 2色トグル設定
     let color1 = "#000000";
     let color2 = "transparent";
@@ -243,9 +244,18 @@
 
       for (let py = 0; py < editSize; py++) {
         for (let px = 0; px < editSize; px++) {
-          editCtx.fillStyle = (px + py) % 2 === 0 ? "#e8e8e8" : "#b8b8b8";
+          // editCtx.fillStyle = (px + py) % 2 === 0 ? "#e8e8e8" : "#b8b8b8";
+          // editCtx.fillRect(px * scale, py * scale, scale, scale);
+          // bgMode に応じて背景色を変更
+          if (bgMode === 'dark') {
+            editCtx.fillStyle = (px + py) % 2 === 0 ? "#333333" : "#222222";
+          } else if (bgMode === 'green') {
+            editCtx.fillStyle = (px + py) % 2 === 0 ? "#00FF00" : "#00CC00";
+          } else { // light
+            editCtx.fillStyle = (px + py) % 2 === 0 ? "#e8e8e8" : "#b8b8b8";
+          }
           editCtx.fillRect(px * scale, py * scale, scale, scale);
-
+          
           const idx = (py * editSize + px) * 4;
           const alpha = imgData[idx + 3];
           if (alpha > 0) {
@@ -465,6 +475,11 @@
     // --- 入出力 & ユーティリティ ---
     function rgbToHex(r, g, b) {
       return "#" + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('');
+    }
+
+    function setBgMode(mode) {
+      bgMode = mode;
+      drawEdit();
     }
 
     function saveImage(format) {
