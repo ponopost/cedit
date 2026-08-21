@@ -574,11 +574,11 @@
           imgCtx.clearRect(0, 0, MAP_SIZE, MAP_SIZE);
           imgCtx.drawImage(img, 0, 0);
           updateAll();
+          saveToStorage();
         };
         img.src = evt.target.result;
       };
       reader.readAsDataURL(file);
-      saveToStorage();
     }
 
     function loadRom(e, type) {
