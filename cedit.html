@@ -372,21 +372,43 @@
     // --- キーボード操作 (WASD: マップカーソル移動) ---
     window.addEventListener('keydown', (e) => {
       if (e.ctrlKey && e.key === 'c') {
+        /*
         const bx = selectedTileX * TILE_PIXELS;
         const by = selectedTileY * TILE_PIXELS;
         clipboardData = imgCtx.getImageData(bx, by, editSize, editSize);
+        */
+        copyTile();
       } else if (e.ctrlKey && e.key === 'v') {
+        /*
         if (clipboardData) {
           const bx = selectedTileX * TILE_PIXELS;
           const by = selectedTileY * TILE_PIXELS;
           imgCtx.putImageData(clipboardData, bx, by);
           updateAll();
         }
+        */
+        pasteTile();
       } else if (['w', 'a', 's', 'd'].includes(e.key.toLowerCase())) {
         moveMapCursor(e.key.toLowerCase());
       }
     });
 
+    // コピー処理
+    function copyTile() {
+      const bx = selectedTileX * TILE_PIXELS;
+      const by = selectedTileY * TILE_PIXELS;
+      clipboardData = imgCtx.getImageData(bx, by, editSize, editSize);
+    }
+
+    // ペースト処理
+    function pasteTile() {
+      if (!clipboardData) return;
+      const bx = selectedTileX * TILE_PIXELS;
+      const by = selectedTileY * TILE_PIXELS;
+      imgCtx.putImageData(clipboardData, bx, by);
+      updateAll();
+    }
+    
     function moveMapCursor(key) {
       const maxPos = MAP_TILES - (editSize / TILE_PIXELS);
       if (key === 'w') selectedTileY = Math.max(0, selectedTileY - 1);
