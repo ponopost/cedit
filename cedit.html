@@ -28,9 +28,10 @@
       background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
     }
     .clr-btn {
+      grid-column: 1 / -1; /* 4列分の幅いっぱいに広げる場合 */
       margin-top: 4px;
-      width: 100%; /* パレットの幅に合わせる場合 */
-      /* または width: 24px; height: 24px; などパレット1個分と同サイズにする */
+      height: 24px;
+      cursor: pointer;
     }
   </style>
 </head>
