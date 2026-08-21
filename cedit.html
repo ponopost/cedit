@@ -49,7 +49,14 @@
       <div>Char Map (8x8dots*256Chars)</div>
       <div>[WASD] Move Cursor</div>
       <canvas id="mapCanvas" width="128" height="128"></canvas>
-    </div>
+
+  <!-- カラー選択エリア -->
+  <div class="color-slots">
+    <div id="indicator1" class="color-slot" onclick="setActiveSlot(1)">Color1</div>
+    <div id="indicator2" class="color-slot" onclick="setActiveSlot(2)">Color2</div>
+  </div>
+  <div class="palette" id="palette"></div>
+  </div>
 
     <!-- 右：拡大編集エリア -->
     <div class="right-panel">
@@ -79,28 +86,22 @@
     </div>
   </div>
 
-  <!-- カラー選択エリア -->
-  <div class="color-slots">
-    <div id="indicator1" class="color-slot" onclick="setActiveSlot(1)">Color1</div>
-    <div id="indicator2" class="color-slot" onclick="setActiveSlot(2)">Color2</div>
-  </div>
-  <div class="palette" id="palette"></div>
-
   <script>
     const TILE_PIXELS = 8;
     const MAP_TILES = 16;
     const MAP_SIZE = TILE_PIXELS * MAP_TILES; // 128px
 
-    const PALETTE = [
-      "#000000","#404040","#808080","#c0c0c0","#ffffff","#ff0000","#00ff00","#0000ff",
-      "#ffff00","#00ffff","#ff00ff","#ff8000","#800000","#008000","#000080","#808000",
-      "#ff6666","#ff3333","#cc0000","#660000","#ffb266","#ff8000","#cc6600","#663300",
-      "#ffcc99","#cc9966","#996633","#663300","#ffcccc","#ff99cc","#cc0066","#660033",
-      "#ffff99","#ffff33","#cccc00","#666600","#ccff99","#99ff33","#66cc00","#336600",
-      "#99ffcc","#33ff99","#00cc66","#006633","#99ffff","#33ffff","#00cccc","#006666",
-      "#99ccff","#3399ff","#0066cc","#003366","#cc99ff","#9933ff","#6600cc","#330066",
-      "#ff99ff","#ff33ff","#cc00cc","#6600cc","#e0e0e0","#a0a0a0","#606060","#202020"
-    ];
+    // ファミコン（NES）標準カラーパレット（54色）
+const PALETTE = [
+  "#666666", "#002A88", "#1412A7", "#3B00A4", "#5C007E", "#6E0040", "#6C0600", "#561D00",
+  "#333500", "#0B4800", "#005200", "#004F08", "#00404D", "#000000", "#000000", "#000000",
+  "#ADADAD", "#155FD9", "#4240FF", "#7527FE", "#A01ACC", "#B71E7B", "#B53120", "#994E00",
+  "#6B6D00", "#388700", "#0C8C00", "#00872B", "#00778A", "#000000", "#000000", "#000000",
+  "#FFFFFF", "#64B0FF", "#9290FF", "#C676FF", "#F36AFF", "#FE6ECC", "#FE8170", "#EA9E22",
+  "#BCBE00", "#88D800", "#5CE430", "#45E082", "#48CDDE", "#4F4F4F", "#000000", "#000000",
+  "#FFFFFF", "#C0DFFF", "#D3D2FF", "#E8C8FF", "#FBC2FF", "#FEC2EB", "#FECECA", "#F6DAA6",
+  "#E4E594", "#CFEE96", "#B5F5B6", "#A8F5D0", "#A9EAFE", "#B8B8B8", "#000000", "#000000"
+];    
 
     const imgCanvas = document.createElement('canvas');
     imgCanvas.width = MAP_SIZE;
