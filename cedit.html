@@ -98,8 +98,8 @@
         <span>copy&paste: </span>
         <button onclick="copyTile()">Copy</button>
         <button onclick="pasteTile()">Paste</button>
+        <button onclick="clearTile()">Clear</button>
         <button onclick="undoImage()">Undo</button>
-        <button onclick="clearAll()">Clear all</button>
       </div>
       <div class="infos" id="statusLabel">Pos: (0, 0) [16x16]</div>
       <canvas id="editCanvas" width="320" height="320"></canvas>
@@ -134,6 +134,9 @@
     imgCanvas.height = MAP_SIZE;
     const imgCtx = imgCanvas.getContext('2d', { willReadFrequently: true });
 
+    const historyStack = [];
+    const MAX_HISTORY = 20; // undo回数の上限（メモリ対策）
+    
     let selectedTileX = 0;
     let selectedTileY = 0;
     let editSize = 16;
@@ -349,6 +352,7 @@
     });
 
     function setPixel(x, y, color) {
+      pushHistory();
       if (color === 'transparent') {
         imgCtx.clearRect(x, y, 1, 1);
       } else {
@@ -406,11 +410,42 @@
     // ペースト処理
     function pasteTile() {
       if (!clipboardData) return;
+      pushHistory();
       const bx = selectedTileX * TILE_PIXELS;
       const by = selectedTileY * TILE_PIXELS;
       imgCtx.putImageData(clipboardData, bx, by);
       updateAll();
       saveToStorage();
+    }
+
+    function clearTile() {
+      pushHistory();
+      // クリア処理
+      updateAll();
+      saveToStorage();
+    }
+
+    // Undo 処理
+    function undoImage() {
+      if (historyStack.length === 0) return;
+  
+      const previousData = historyStack.pop();
+      const img = new Image();
+      img.onload = () => {
+        imgCtx.clearRect(0, 0, MAP_SIZE, MAP_SIZE);
+        imgCtx.drawImage(img, 0, 0);
+        updateAll();
+        saveToStorage(); // localStorage側も最新に更新
+      };
+      img.src = previousData;
+    }    
+
+    // 状態を履歴に保存する関数 (undo用保存処理)
+    function pushHistory() {
+      if (historyStack.length >= MAX_HISTORY) {
+        historyStack.shift(); // 古い履歴を削除
+      }
+      historyStack.push(imgCanvas.toDataURL());
     }
     
     function moveMapCursor(key) {
@@ -449,7 +484,6 @@
         imgCtx.drawImage(tempCanvas, editSize - 1, 0, 1, editSize, bx, by, 1, editSize);
       }
       updateAll();
-      saveToStorage();
     }
 
     // --- 変形処理（反転・回転） ---
@@ -468,6 +502,7 @@
       destCanvas.height = editSize;
       const dCtx = destCanvas.getContext('2d');
 
+      pushHistory();
       transformFn(dCtx, tempCanvas);
 
       imgCtx.clearRect(bx, by, editSize, editSize);
@@ -535,6 +570,7 @@
     function loadImage(e) {
       const file = e.target.files[0];
       if (!file) return;
+      pushHistory();
       const reader = new FileReader();
       reader.onload = (evt) => {
         const img = new Image();
@@ -552,6 +588,7 @@
     function loadRom(e, type) {
       const file = e.target.files[0];
       if (!file) return;
+      pushHistory();
       const reader = new FileReader();
       reader.onload = (evt) => {
         const bytes = new Uint8Array(evt.target.result);
@@ -630,4 +667,3 @@
   </script>
 </body>
 </html>
-
