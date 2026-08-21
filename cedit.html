@@ -354,6 +354,7 @@
         imgCtx.fillRect(x, y, 1, 1);
       }
       updateAll();
+      saveToStorage();
     }
 
     function setSize(size) {
@@ -407,6 +408,7 @@
       const by = selectedTileY * TILE_PIXELS;
       imgCtx.putImageData(clipboardData, bx, by);
       updateAll();
+      saveToStorage();
     }
     
     function moveMapCursor(key) {
@@ -445,6 +447,7 @@
         imgCtx.drawImage(tempCanvas, editSize - 1, 0, 1, editSize, bx, by, 1, editSize);
       }
       updateAll();
+      saveToStorage();
     }
 
     // --- 変形処理（反転・回転） ---
@@ -468,6 +471,7 @@
       imgCtx.clearRect(bx, by, editSize, editSize);
       imgCtx.drawImage(destCanvas, bx, by);
       updateAll();
+      saveToStorage();
     }
 
     function flipHorizontal() {
@@ -540,6 +544,7 @@
         img.src = evt.target.result;
       };
       reader.readAsDataURL(file);
+      saveToStorage();
     }
 
     function loadRom(e, type) {
@@ -557,6 +562,7 @@
             const chrOffset = 16 + prs + subOffset;
             parseChrToCanvas(bytes, chrOffset);
             updateAll();
+            saveToStorage();
           } else {
             alert("Invalid NES ROM file.");
           }
@@ -596,6 +602,25 @@
       }
     }
 
+    // localStorage へ保存
+    function saveToStorage() {
+      const dataURL = imgCanvas.toDataURL();
+      localStorage.setItem('cedit_saved_image', dataURL);
+    }
+
+    // localStorage から復元
+    function loadFromStorage() {
+      const savedData = localStorage.getItem('cedit_saved_image');
+      if (!savedData) return;
+      const img = new Image();
+      img.onload = () => {
+        imgCtx.clearRect(0, 0, MAP_SIZE, MAP_SIZE);
+        imgCtx.drawImage(img, 0, 0);
+        updateAll();
+      };
+      img.src = savedData;
+    }
+   
     // 初期化
     updateColorIndicators();
     updateAll();
