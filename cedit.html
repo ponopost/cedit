@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>Famicom-style Icon Editor (HTML Canvas)</title>
+  <title>Famicom-style Char Editor (HTML Canvas)</title>
   <style>
     body { font-family: sans-serif; background: #f0f0f0; margin: 20px; user-select: none; }
     .container { display: flex; gap: 20px; }
@@ -69,9 +69,9 @@
         <button onclick="scrollArea('d')">▶ Right</button>
         <br>
         <span>Transform: </span>
-        <button onclick="flipHorizontal()">⇄ 左右反転</button>
-        <button onclick="flipVertical()">⇅ 上下反転</button>
-        <button onclick="rotate90()">↻ 90度回転</button>
+        <button onclick="flipHorizontal()">⇄ Horz Invert</button>
+        <button onclick="flipVertical()">⇅ Vert Invert</button>
+        <button onclick="rotate90()">↻ Rotate 90</button>
       </div>
 
       <div id="statusLabel">Pos: (0, 0) [16x16] | [Ctrl+C/V] Copy&Paste</div>
@@ -81,8 +81,8 @@
 
   <!-- カラー選択エリア -->
   <div class="color-slots">
-    <div id="indicator1" class="color-slot" onclick="setActiveSlot(1)">色1 (メイン)</div>
-    <div id="indicator2" class="color-slot" onclick="setActiveSlot(2)">色2 (サブ/消し)</div>
+    <div id="indicator1" class="color-slot" onclick="setActiveSlot(1)">Color1</div>
+    <div id="indicator2" class="color-slot" onclick="setActiveSlot(2)">Color2</div>
   </div>
   <div class="palette" id="palette"></div>
 
@@ -136,7 +136,7 @@
 
     const transBtn = document.createElement('div');
     transBtn.className = 'color-btn transparent-btn'; // ← クラスを追加
-    transBtn.innerText = '透';
+    transBtn.innerText = 'clr';
     transBtn.style.textAlign = 'center';
     transBtn.style.lineHeight = '22px'; // テキストの位置調整
     transBtn.style.fontSize = '12px';
